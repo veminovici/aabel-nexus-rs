@@ -1,6 +1,6 @@
 # Simplee > Aabel > Nexus
 
-![CI][ci-badge]][ci-url]
+[![CI][ci-badge]][ci-url]
 ![GitHub top language][lang-badge]
 [![License:MIT][license-badge]][license-url]
 ![GitHub code size in bytes][size-badge]
