@@ -7,7 +7,7 @@
 ![GitHub last commit][last-commit-badge]
 ![GitHub watchers][watchers-badge]
 
-A set of create for distributed algorithms.
+A set of crates for distributed algorithms. They use an actor model.
 
 ## About
 > Code designed and written on the beautiful island of [**Saaremaa**][url_estonia], Estonia.
