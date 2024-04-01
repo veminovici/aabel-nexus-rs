@@ -11,7 +11,15 @@ pub struct DispatchMsg {
 }
 
 impl DispatchMsg {
-    const SHORT_NAME: &'static str = "DISP";
+    pub(crate) const SHORT_NAME: &'static str = "DISP";
+
+    pub fn with_sid(sid: Sid) -> BuildDispatchMsgWithSid {
+        BuildDispatchMsgWithSid { sid }
+    }
+
+    pub fn sid(&self) -> &Sid {
+        &self.sid
+    }
 }
 
 impl Message for DispatchMsg {
@@ -64,38 +72,30 @@ impl LowerHex for DispatchMsg {
 // Builder pattern
 //
 
-pub struct BuilderDispatchMsg;
-
-impl BuilderDispatchMsg {
-    pub fn with_sid(sid: Sid) -> BuilderWithSid {
-        BuilderWithSid { sid }
-    }
-}
-
-pub struct BuilderWithSid {
+pub struct BuildDispatchMsgWithSid {
     sid: Sid,
 }
 
-impl From<Sid> for BuilderWithSid {
+impl From<Sid> for BuildDispatchMsgWithSid {
     fn from(sid: Sid) -> Self {
         Self { sid }
     }
 }
 
-impl BuilderWithSid {
-    pub fn with_fid(self, fid: Fid) -> BuilderWithSidFid {
-        BuilderWithSidFid { sid: self.sid, fid }
+impl BuildDispatchMsgWithSid {
+    pub fn with_fid(self, fid: Fid) -> BuildDispatchMsgWithSidFid {
+        BuildDispatchMsgWithSidFid { sid: self.sid, fid }
     }
 }
 
-pub struct BuilderWithSidFid {
+pub struct BuildDispatchMsgWithSidFid {
     sid: Sid,
     fid: Fid,
 }
 
-impl BuilderWithSidFid {
-    pub fn with_tid(self, tid: Tid) -> BuilderWithSidFidTid {
-        BuilderWithSidFidTid {
+impl BuildDispatchMsgWithSidFid {
+    pub fn with_tid(self, tid: Tid) -> BuildDispatchMsgWithSidFidTid {
+        BuildDispatchMsgWithSidFidTid {
             sid: self.sid,
             fid: self.fid,
             tid,
@@ -103,18 +103,18 @@ impl BuilderWithSidFid {
     }
 }
 
-pub struct BuilderWithSidFidTid {
+pub struct BuildDispatchMsgWithSidFidTid {
     sid: Sid,
     fid: Fid,
     tid: Tid,
 }
 
-impl BuilderWithSidFidTid {
-    pub fn with_body<I>(self, values: I) -> BuilderComplete
+impl BuildDispatchMsgWithSidFidTid {
+    pub fn with_body<I>(self, values: I) -> BuildDispatchMsgComplete
     where
         I: Iterator<Item = u8>,
     {
-        BuilderComplete {
+        BuildDispatchMsgComplete {
             sid: self.sid,
             fid: self.fid,
             tid: self.tid,
@@ -123,14 +123,14 @@ impl BuilderWithSidFidTid {
     }
 }
 
-pub struct BuilderComplete {
+pub struct BuildDispatchMsgComplete {
     sid: Sid,
     fid: Fid,
     tid: Tid,
     body: Body,
 }
 
-impl BuilderComplete {
+impl BuildDispatchMsgComplete {
     pub fn build(self) -> DispatchMsg {
         DispatchMsg {
             sid: self.sid,

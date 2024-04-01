@@ -11,7 +11,19 @@ pub struct RegisterMsg {
 }
 
 impl RegisterMsg {
-    const SHORT_NAME: &'static str = "REGN";
+    pub(crate) const SHORT_NAME: &'static str = "REGN";
+
+    pub fn sid(&self) -> &Sid {
+        &self.sid
+    }
+
+    pub fn aid(&self) -> &Aid {
+        &self.aid
+    }
+
+    pub fn recipient(&self) -> &WeakRecipient<DeliverMsg> {
+        &self.recipient
+    }
 }
 
 impl Message for RegisterMsg {
@@ -40,32 +52,32 @@ impl LowerHex for RegisterMsg {
 // Builder pattern
 //
 
-pub struct BuilderRegisterMsg;
+pub struct BuildRegisterMsg;
 
-impl BuilderRegisterMsg {
-    pub fn with_sid(sid: Sid) -> BuilderWithSid {
-        BuilderWithSid { sid }
+impl BuildRegisterMsg {
+    pub fn with_sid(sid: Sid) -> BuildRegisterMsgWithSid {
+        BuildRegisterMsgWithSid { sid }
     }
 }
 
-pub struct BuilderWithSid {
+pub struct BuildRegisterMsgWithSid {
     sid: Sid,
 }
 
-impl BuilderWithSid {
-    pub fn with_aid(self, aid: Aid) -> BuilderWithSidAid {
-        BuilderWithSidAid { sid: self.sid, aid }
+impl BuildRegisterMsgWithSid {
+    pub fn with_aid(self, aid: Aid) -> BuildRegisterMsgWithSidAid {
+        BuildRegisterMsgWithSidAid { sid: self.sid, aid }
     }
 }
 
-pub struct BuilderWithSidAid {
+pub struct BuildRegisterMsgWithSidAid {
     sid: Sid,
     aid: Aid,
 }
 
-impl BuilderWithSidAid {
-    pub fn with_ricepient(self, recipient: WeakRecipient<DeliverMsg>) -> BuilderComplete {
-        BuilderComplete {
+impl BuildRegisterMsgWithSidAid {
+    pub fn with_ricepient(self, recipient: WeakRecipient<DeliverMsg>) -> BuildRegisterMsgComplete {
+        BuildRegisterMsgComplete {
             sid: self.sid,
             aid: self.aid,
             recipient,
@@ -73,13 +85,13 @@ impl BuilderWithSidAid {
     }
 }
 
-pub struct BuilderComplete {
+pub struct BuildRegisterMsgComplete {
     sid: Sid,
     aid: Aid,
     recipient: WeakRecipient<DeliverMsg>,
 }
 
-impl BuilderComplete {
+impl BuildRegisterMsgComplete {
     pub fn build(self) -> RegisterMsg {
         RegisterMsg {
             sid: self.sid,
