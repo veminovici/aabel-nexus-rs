@@ -1,5 +1,5 @@
 [workspace]
-members = ["nexus-core", "nexus-ids"]
+members = ["nexus-core", "nexus-ids", "nexus-kernel"]
 resolver = "2"
 
 [workspace.package]

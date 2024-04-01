@@ -244,6 +244,14 @@ name = "nexus-ids"
 version = "0.1.0"
 
 [[package]]
+name = "nexus-kernel"
+version = "0.1.0"
+dependencies = [
+ "actix",
+ "nexus-ids",
+]
+
+[[package]]
 name = "object"
 version = "0.32.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
