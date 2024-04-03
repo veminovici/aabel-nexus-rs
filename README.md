@@ -19,6 +19,58 @@ A set of crates for distributed algorithms. They use an actor model.
 - The [nexus-observer][nexus-observer-folder] crate implements the **Observer** actor. The actor counts the number of successful and failed operations during the execution of the run.
 - The [nexus-kernel][nexus-kernel-folder] crate implements the **Kernel** actor. The actor receives and delivers messages to other actors.
 
+## Examples
+You can find an example of how to use the Observer actor at in the [test_observer](./nexus-observer//tests/test_observer.rs) file.
+
+```rust
+let observer = Observer::start();
+
+// Increment success for key1
+let msg = OpSucceededMsg::new("key1");
+let _ = observer.send(msg).await.unwrap();
+
+let msg = OpSucceededMsg::new("key1");
+let _ = observer.send(msg).await.unwrap();
+
+// Increment fail for key2
+let msg = OpFailedMsg::new("key2");
+let _ = observer.send(msg).await.unwrap();
+
+eprintln!("Sending keys message");
+
+let msg = KeysMsg;
+let res = observer.send(msg).await.unwrap();
+
+eprintln!("keys: {:?}", res.keys());
+```
+
+A second example show how to use the kernel actor, which you can find it in the [test_kernel](./nexus-kernel/tests/test_kernel.rs) file.
+
+```rust
+let kernel = Kernel::new().start();
+let actor = MyActor::new().start();
+
+// Register the actor (it will be the destination of a message)
+let aid = 2.into();
+let msg = Register::new(aid, actor.downgrade().recipient());
+let _ = kernel.send(msg).await.unwrap();
+
+// Dispatch a message to the actor we just created
+let fid = Aid::from(1);
+let tid = aid; // this is the aid of the actor we just created
+let sid = Sid::from(fid);
+let msg = Dispatch::new(fid, tid, sid);
+let _ = kernel.send(msg).await.unwrap();
+
+// Validate that the actor received and processed the message
+let valid = actor.send(Validate).await.unwrap();
+assert!(valid);
+
+// Unregister the actor
+let msg = Unregister::new(aid);
+let _ = kernel.send(msg).await.unwrap();
+```
+
 ## About
 > Code designed and written on the beautiful island of [**Saaremaa**][url_estonia], Estonia.
 
