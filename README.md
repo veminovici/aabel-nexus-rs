@@ -16,6 +16,7 @@ A set of crates for distributed algorithms. They use an actor model.
 - The [nexus-counters][nexus-counters-folder] crate implements a distributed counter. In our case it will be used to increment different values.
 - The [nexus-session-store][nexus-session-store-folder] crate implements a store for session. Each session can store values for each node.
 - The [nexus-message][nexus-message-folder] crate implements serveral extensions for the actix::Message trait.
+- The [nexus-observer][nexus-observer-folder] crate implements the Observer actor. The actor counts the number of successful and failed operations during the execution of the run.
 
 ## About
 > Code designed and written on the beautiful island of [**Saaremaa**][url_estonia], Estonia.
@@ -36,4 +37,5 @@ A set of crates for distributed algorithms. They use an actor model.
 [nexus-counters-folder]: ./nexus-counters/
 [nexus-message-folder]: ./nexus-message/
 [nexus-session-store-folder]: ./nexus-session-store/
+[nexus-observer-folder]: ./nexus-observer/
 [def]: ./nexus-hashmap/

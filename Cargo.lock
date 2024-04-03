@@ -251,6 +251,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "nexus-observer"
+version = "0.1.0"
+dependencies = [
+ "actix",
+ "nexus-counters",
+ "nexus-hashmap",
+]
+
+[[package]]
 name = "nexus-session-store"
 version = "0.1.0"
 dependencies = [
