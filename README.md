@@ -9,6 +9,9 @@
 
 A set of crates for distributed algorithms. They use an actor model.
 
+## [nexus-ids][nexus-ids-folder] crate
+This crate implements the actor and session identifiers.
+
 ## About
 > Code designed and written on the beautiful island of [**Saaremaa**][url_estonia], Estonia.
 
@@ -22,3 +25,4 @@ A set of crates for distributed algorithms. They use an actor model.
 [last-commit-badge]: https://img.shields.io/github/last-commit/veminovici/aabel-nexus-rs
 [watchers-badge]: https://img.shields.io/github/watchers/veminovici/aabel-nexus-rs
 [url_estonia]: https://goo.gl/maps/DmB9ewY2R3sPGFnTA
+[nexus-ids-folder]: ./nexus-ids/
