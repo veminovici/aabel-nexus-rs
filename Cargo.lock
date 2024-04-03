@@ -239,6 +239,15 @@ name = "nexus-ids"
 version = "0.1.0"
 
 [[package]]
+name = "nexus-kernel"
+version = "0.1.0"
+dependencies = [
+ "actix",
+ "nexus-ids",
+ "nexus-message",
+]
+
+[[package]]
 name = "nexus-lattice"
 version = "0.1.0"
 
