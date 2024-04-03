@@ -7,7 +7,7 @@
 ![GitHub last commit][last-commit-badge]
 ![GitHub watchers][watchers-badge]
 
-A set of crates for distributed algorithms. They use an actor model.
+A set of crates for distributed algorithms. They use an actor model and the [actix][actix_url] actor framework.
 
 ## Crates
 - The [nexus-ids][nexus-ids-folder] crate implements the actor and session identifiers.
@@ -93,3 +93,4 @@ let _ = kernel.send(msg).await.unwrap();
 [nexus-observer-folder]: ./nexus-observer/
 [nexus-kernel-folder]: ./nexus-kernel/
 [def]: ./nexus-hashmap/
+[actix_url]: https://actix.rs/docs/actix
