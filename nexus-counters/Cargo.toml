@@ -1,0 +1,9 @@
+[package]
+name = "nexus-counters"
+version = "0.1.0"
+edition = "2021"
+authors.workspace = true
+description.workspace = true
+
+[dependencies]
+nexus-lattice = { path = "../nexus-lattice" }

@@ -224,11 +224,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "nexus-counters"
+version = "0.1.0"
+dependencies = [
+ "nexus-lattice",
+]
+
+[[package]]
 name = "nexus-hashmap"
 version = "0.1.0"
 
 [[package]]
 name = "nexus-ids"
+version = "0.1.0"
+
+[[package]]
+name = "nexus-lattice"
 version = "0.1.0"
 
 [[package]]
