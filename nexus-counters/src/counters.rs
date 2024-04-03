@@ -6,6 +6,21 @@ use std::{
 use nexus_lattice::{Join, JoinAssign, Meet, MeetAssign};
 
 /// A generalization of tuple of [`usize`] values.
+///
+/// # Example
+///
+/// ```
+/// use nexus_counters::*;
+///
+/// const ONE: Counters<4> = Counters([1, 0, 0, 0]);
+///
+/// let vals = Counters([0, 0, 0, 0]);
+/// let vals = vals + ONE;
+/// assert_eq!(vals.0[0], 1);
+///
+/// let vals = vals + ONE;
+/// assert_eq!(vals.0[0], 2);
+/// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Counters<const N: usize>(pub(crate) [usize; N]);
 
