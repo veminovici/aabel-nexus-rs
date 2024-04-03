@@ -251,6 +251,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "nexus-session-store"
+version = "0.1.0"
+dependencies = [
+ "nexus-hashmap",
+ "nexus-ids",
+]
+
+[[package]]
 name = "object"
 version = "0.32.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"

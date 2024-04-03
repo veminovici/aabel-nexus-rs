@@ -9,21 +9,13 @@
 
 A set of crates for distributed algorithms. They use an actor model.
 
-## Crate nexus-ids
-The [nexus-ids][nexus-ids-folder] crate implements the actor and session identifiers.
-
-## Crate nexus-hashmap
-The [nexus-hashmap][nexus-hashmap-folder] crate implements several extensions for the HashMap.
-
-## Crate nexus-lattice
-The [nexus-lattice][nexus-lattice-folder] crate defines *Join* and *Meet* traits, basic operations in the [lattice](https://en.wikipedia.org/wiki/Join_and_meet) theory.
-These operations are used for CRDs in our case the Nexus counters.
-
-## Crate nexus-counters
-The [nexus-counters][nexus-counters-folder] crate implements a distributed counter. In our case it will be used to increment different values.
-
-## Crate nexus-message
-The [nexus-message][nexus-message-folder] crate implements serveral extensions for the actix::Message trait.
+## Crates
+- The [nexus-ids][nexus-ids-folder] crate implements the actor and session identifiers.
+- The [nexus-hashmap][nexus-hashmap-folder] crate implements several extensions for the HashMap.
+- The [nexus-lattice][nexus-lattice-folder] crate defines *Join* and *Meet* traits, basic operations in the [lattice](https://en.wikipedia.org/wiki/Join_and_meet) theory.
+- The [nexus-counters][nexus-counters-folder] crate implements a distributed counter. In our case it will be used to increment different values.
+- The [nexus-session-store][nexus-session-store-folder] crate implements a store for session. Each session can store values for each node.
+- The [nexus-message][nexus-message-folder] crate implements serveral extensions for the actix::Message trait.
 
 ## About
 > Code designed and written on the beautiful island of [**Saaremaa**][url_estonia], Estonia.
@@ -41,6 +33,7 @@ The [nexus-message][nexus-message-folder] crate implements serveral extensions f
 [nexus-ids-folder]: ./nexus-ids/
 [nexus-hashmap-folder]: ./nexus-hashmap/
 [nexus-lattice-folder]: ./nexus-lattice/
-[nexus-counter-folder]: ./nexus-counters/
+[nexus-counters-folder]: ./nexus-counters/
 [nexus-message-folder]: ./nexus-message/
+[nexus-session-store-folder]: ./nexus-session-store/
 [def]: ./nexus-hashmap/
