@@ -59,37 +59,32 @@ impl PartialOrd for Sid {
     }
 }
 
-mod generators {
-    use crate::{Aid, Sid};
+pub struct SidGenerator {
+    aid: Aid,
+    seq: usize,
+}
 
-    pub struct SidGenerator {
-        aid: Aid,
-        seq: usize,
+impl Iterator for SidGenerator {
+    type Item = Sid;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let sid = Sid::new(self.aid, self.seq);
+        self.seq += 1;
+        Some(sid)
     }
+}
 
-    impl Iterator for SidGenerator {
-        type Item = Sid;
-
-        fn next(&mut self) -> Option<Self::Item> {
-            let sid = Sid::new(self.aid, self.seq);
-            self.seq += 1;
-            Some(sid)
-        }
-    }
-
-    impl From<Aid> for SidGenerator {
-        fn from(aid: Aid) -> Self {
-            Self {
-                aid,
-                seq: Default::default(),
-            }
+impl From<Aid> for SidGenerator {
+    fn from(aid: Aid) -> Self {
+        Self {
+            aid,
+            seq: Default::default(),
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::generators::*;
     use super::*;
     use std::cmp::Ordering;
 
