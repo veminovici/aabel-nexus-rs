@@ -59,6 +59,20 @@ impl PartialOrd for Sid {
     }
 }
 
+/// Generates an infinite sequence of session identifiers.
+///
+/// # Example
+///
+/// ```
+/// use nexus_ids::{Aid, SidGenerator};
+///
+/// let aid = Aid::from(10);
+/// let gen = SidGenerator::from(aid);
+/// let mut xs = gen.map(|sid| sid.seq_number());
+///
+/// assert_eq!(xs.next(), Some(0));
+/// assert_eq!(xs.next(), Some(1));
+/// ```
 pub struct SidGenerator {
     aid: Aid,
     seq: usize,
@@ -102,7 +116,7 @@ mod tests {
     fn generate_seq() {
         let aid = Aid::from(10);
         let gen = SidGenerator::from(aid);
-        let mut xs = gen.map(|sid| sid.seq);
+        let mut xs = gen.map(|sid| sid.seq_number());
 
         assert_eq!(xs.next(), Some(0));
         assert_eq!(xs.next(), Some(1));
