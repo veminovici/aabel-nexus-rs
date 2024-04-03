@@ -11,18 +11,48 @@ use nexus_lattice::{Join, JoinAssign, Meet, MeetAssign};
 ///
 /// ```
 /// use nexus_counters::*;
+/// use nexus_lattice::*;
 ///
-/// const ONE: Counters<4> = Counters([1, 0, 0, 0]);
+/// let one: Counters<4> = Counters::new([1, 0, 0, 0]);
 ///
-/// let vals = Counters([0, 0, 0, 0]);
-/// let vals = vals + ONE;
-/// assert_eq!(vals.0[0], 1);
+/// let vals = Counters::new([0, 0, 0, 0]);
 ///
-/// let vals = vals + ONE;
-/// assert_eq!(vals.0[0], 2);
+/// let vals = vals + one;
+/// assert_eq!(vals.as_ref()[0], 1);
+///
+/// let vals = vals + one;
+/// assert_eq!(vals.as_ref()[0], 2);
+///
+/// let mut x = Counters::new([1, 2, 3]);
+/// let y = Counters::new([3, 2, 1]);
+/// x.join_assign(y);
+/// assert_eq!(x, Counters::new([3, 2, 3]));
+///
+/// let mut x = Counters::new([1, 2, 3]);
+/// let y = Counters::new([3, 2, 1]);
+/// x.meet_assign(y);
+/// assert_eq!(x, Counters::new([1, 2, 1]));
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Counters<const N: usize>(pub(crate) [usize; N]);
+
+impl<const N: usize> Counters<N> {
+    /// Create a new [`Counters`] instance.
+    pub fn new(xs: [usize; N]) -> Self {
+        Self(xs)
+    }
+
+    /// Returns the inner set of values.
+    pub fn inner(&self) -> &[usize; N] {
+        &self.0
+    }
+}
+
+impl<const N: usize> AsRef<[usize; N]> for Counters<N> {
+    fn as_ref(&self) -> &[usize; N] {
+        &self.0
+    }
+}
 
 impl<const N: usize> Default for Counters<N> {
     fn default() -> Self {
@@ -115,57 +145,57 @@ mod tests {
 
     #[test]
     fn add() {
-        const ONE: Counters<4> = Counters([1, 0, 0, 0]);
+        let one: Counters<4> = Counters::new([1, 0, 0, 0]);
 
-        let vals = Counters([0, 0, 0, 0]);
-        let vals = vals + ONE;
+        let vals = Counters::new([0, 0, 0, 0]);
+        let vals = vals + one;
         assert_eq!(vals.0[0], 1);
 
-        let vals = vals + ONE;
+        let vals = vals + one;
         assert_eq!(vals.0[0], 2);
     }
 
     #[test]
     fn add_assign() {
-        const ONE: Counters<4> = Counters([1, 0, 0, 0]);
+        let one: Counters<4> = Counters([1, 0, 0, 0]);
 
-        let mut vals = Counters([0, 0, 0, 0]);
-        vals += ONE;
-        assert_eq!(vals.0[0], 1);
+        let mut vals = Counters::new([0, 0, 0, 0]);
+        vals += one;
+        assert_eq!(vals.as_ref()[0], 1);
 
-        vals += ONE;
-        assert_eq!(vals.0[0], 2);
+        vals += one;
+        assert_eq!(vals.as_ref()[0], 2);
     }
 
     #[test]
     fn join() {
-        let x = Counters([1, 2, 3]);
-        let y = Counters([3, 2, 1]);
+        let x = Counters::new([1, 2, 3]);
+        let y = Counters::new([3, 2, 1]);
         let res = x.join(y);
-        assert_eq!(res, Counters([3, 2, 3]));
+        assert_eq!(res, Counters::new([3, 2, 3]));
     }
 
     #[test]
     fn join_assign() {
-        let mut x = Counters([1, 2, 3]);
-        let y = Counters([3, 2, 1]);
+        let mut x = Counters::new([1, 2, 3]);
+        let y = Counters::new([3, 2, 1]);
         x.join_assign(y);
-        assert_eq!(x, Counters([3, 2, 3]));
+        assert_eq!(x, Counters::new([3, 2, 3]));
     }
 
     #[test]
     fn meet() {
-        let x = Counters([1, 2, 3]);
-        let y = Counters([3, 2, 1]);
+        let x = Counters::new([1, 2, 3]);
+        let y = Counters::new([3, 2, 1]);
         let res = x.meet(y);
-        assert_eq!(res, Counters([1, 2, 1]));
+        assert_eq!(res, Counters::new([1, 2, 1]));
     }
 
     #[test]
     fn meet_assign() {
-        let mut x = Counters([1, 2, 3]);
-        let y = Counters([3, 2, 1]);
+        let mut x = Counters::new([1, 2, 3]);
+        let y = Counters::new([3, 2, 1]);
         x.meet_assign(y);
-        assert_eq!(x, Counters([1, 2, 1]));
+        assert_eq!(x, Counters::new([1, 2, 1]));
     }
 }
