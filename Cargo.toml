@@ -1,5 +1,5 @@
 [workspace]
-members = ["nexus-ids"]
+members = [ "nexus-hashmap","nexus-ids"]
 resolver = "2"
 
 [workspace.package]

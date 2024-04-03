@@ -3,5 +3,9 @@
 version = 3
 
 [[package]]
+name = "nexus-hashmap"
+version = "0.1.0"
+
+[[package]]
 name = "nexus-ids"
 version = "0.1.0"
