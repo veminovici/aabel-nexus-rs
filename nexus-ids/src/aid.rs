@@ -2,7 +2,7 @@ use std::{borrow::Borrow, fmt::Display, hash::Hash};
 
 /// The actor identifier. It is just a simple wrapper around
 /// an [`usize`] value. It implements [`Hash`] trait because
-/// it is used as key in [`HashMap`] structures.
+/// it is used as key in [`std::collections::HashMap`] structures.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Aid(usize);
 

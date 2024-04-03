@@ -1,4 +1,4 @@
-//! The crate extends the [`HashMap`] functionality.
+//! The crate extends the [`std::collections::HashMap`] functionality.
 //!
 //! # Example
 //!
