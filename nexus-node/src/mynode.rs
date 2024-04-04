@@ -5,9 +5,14 @@ use nexus_list::ARList;
 use nexus_message::{Deliver, Dispatch, RegKernel, RegNeighbor, UnregNeighbor};
 
 pub trait Node: ActorExt {
+    /// A short name for the node
+    fn short_name(&self) -> &'static str;
+
     /// Handles an incoming message. It returns the collection
     /// of messages to be sent to other nodes.
-    fn handle_msg(&self, msg: Deliver) -> impl Iterator<Item = Dispatch>;
+    fn handle_msg(&self, _msg: Deliver) -> impl Iterator<Item = Dispatch> {
+        [].into_iter()
+    }
 }
 
 pub struct MyNode {
@@ -16,6 +21,8 @@ pub struct MyNode {
 }
 
 impl MyNode {
+    const SHORT_NAME: &'static str = "MYND";
+
     pub fn new() -> Self {
         Self {
             krnl: None,
@@ -80,5 +87,9 @@ impl Node for MyNode {
     fn handle_msg(&self, _msg: Deliver) -> impl Iterator<Item = Dispatch> {
         eprintln!("MyNode - is handling a message");
         [].into_iter()
+    }
+
+    fn short_name(&self) -> &'static str {
+        Self::SHORT_NAME
     }
 }
