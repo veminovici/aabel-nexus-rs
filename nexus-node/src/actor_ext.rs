@@ -10,6 +10,15 @@ where
 {
 }
 
+impl<T> ActorExt for T
+where
+    T: Handler<Deliver>,
+    T: Handler<RegNeighbor>,
+    T: Handler<UnregNeighbor>,
+    T: Handler<RegKernel>,
+{
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -52,11 +61,5 @@ mod tests {
         fn handle(&mut self, _msg: RegKernel, _ctx: &mut Self::Context) -> Self::Result {
             todo!()
         }
-    }
-
-    impl ActorExt for MyActor {
-        // fn handle_msg(&self, _msg: Deliver) -> impl Iterator<Item = Dispatch> {
-        //     [].into_iter()
-        // }
     }
 }
