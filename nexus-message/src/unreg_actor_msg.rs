@@ -1,8 +1,7 @@
-use std::borrow::Borrow;
-
 use crate::{Header, MessageExt};
 use actix::Message;
 use nexus_ids::Aid;
+use std::{borrow::Borrow, fmt::Display};
 
 pub struct UnregActor(Aid);
 
@@ -51,5 +50,11 @@ impl AsRef<Aid> for UnregActor {
 impl Borrow<Aid> for UnregActor {
     fn borrow(&self) -> &Aid {
         &self.0
+    }
+}
+
+impl Display for UnregActor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}:{}", Self::SHORT_NAME, self.0)
     }
 }

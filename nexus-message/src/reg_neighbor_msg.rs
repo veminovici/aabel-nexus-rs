@@ -1,9 +1,21 @@
 use crate::{Header, MessageExt};
 use actix::Message;
 use nexus_ids::Aid;
-use std::borrow::Borrow;
+use std::{borrow::Borrow, fmt::Display};
 
 pub struct RegNeighbor(Aid);
+
+impl RegNeighbor {
+    const SHORT_NAME: &'static str = "NGBR+";
+
+    pub fn new(aid: Aid) -> Self {
+        Self(aid)
+    }
+
+    pub fn aid(&self) -> &Aid {
+        &self.0
+    }
+}
 
 impl Message for RegNeighbor {
     type Result = ();
@@ -11,7 +23,7 @@ impl Message for RegNeighbor {
 
 impl MessageExt for RegNeighbor {
     fn short_name(&self) -> &str {
-        "NGHB+"
+        Self::SHORT_NAME
     }
 
     fn headers(&self) -> impl Iterator<Item = &Header> {
@@ -38,5 +50,11 @@ impl AsRef<Aid> for RegNeighbor {
 impl Borrow<Aid> for RegNeighbor {
     fn borrow(&self) -> &Aid {
         &self.0
+    }
+}
+
+impl Display for RegNeighbor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}:{}", Self::SHORT_NAME, self.0)
     }
 }

@@ -1,8 +1,8 @@
+use crate::Deliver;
 use crate::{Header, MessageExt};
 use actix::{Message, WeakRecipient};
 use nexus_ids::Aid;
-
-use crate::Deliver;
+use std::fmt::Display;
 
 pub struct RegActor {
     aid: Aid,
@@ -40,5 +40,11 @@ impl MessageExt for RegActor {
 
     fn body(&self) -> impl Iterator<Item = u8> {
         [].into_iter()
+    }
+}
+
+impl Display for RegActor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}:{}", Self::SHORT_NAME, self.aid)
     }
 }
