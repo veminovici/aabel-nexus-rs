@@ -10,14 +10,14 @@ impl<T> Neighbors<T> {
         Self(Default::default())
     }
 
-    pub fn with_items(xs: impl Iterator<Item = T>) -> Self {
-        Self(Vec::from_iter(xs))
+    pub fn with_items(iter: impl Iterator<Item = T>) -> Self {
+        Self::from(iter)
     }
 }
 
 impl<T> Default for Neighbors<T> {
     fn default() -> Self {
-        Self(Default::default())
+        Self::new()
     }
 }
 
@@ -33,20 +33,29 @@ impl<T> Borrow<[T]> for Neighbors<T> {
     }
 }
 
+impl<T, I> From<I> for Neighbors<T>
+where
+    I: Iterator<Item = T>,
+{
+    fn from(iter: I) -> Self {
+        Self(Vec::from_iter(iter))
+    }
+}
+
 impl<T, U> Add<U> for Neighbors<T>
 where
-    T: PartialEq + Eq + Clone,
+    T: PartialEq + Eq + Copy,
     U: Borrow<T>,
 {
     type Output = Self;
 
-    fn add(self, aid: U) -> Self::Output {
-        let aid = aid.borrow();
+    fn add(self, u: U) -> Self::Output {
+        let other = u.borrow();
 
-        if self.0.iter().all(|a| a != aid) {
+        if self.0.iter().all(|t| t != other) {
             let mut ns = self.0;
-            ns.push(aid.clone());
-            Self(ns)
+            ns.push(*other);
+            Self::from(ns.into_iter())
         } else {
             Self(self.0)
         }
@@ -55,43 +64,43 @@ where
 
 impl<T, U> AddAssign<U> for Neighbors<T>
 where
-    T: PartialEq + Eq + Clone,
+    T: PartialEq + Eq + Copy,
     U: Borrow<T>,
 {
-    fn add_assign(&mut self, aid: U) {
-        let aid = aid.borrow();
-        if self.0.iter().all(|a| a != aid) {
-            self.0.push(aid.clone())
+    fn add_assign(&mut self, u: U) {
+        let other = u.borrow();
+
+        if self.0.iter().all(|t| t != other) {
+            self.0.push(*other)
         }
     }
 }
 
 impl<T, U> Sub<U> for Neighbors<T>
 where
-    T: PartialEq + Eq + Clone,
+    T: PartialEq + Eq,
     U: Borrow<T>,
 {
     type Output = Self;
 
-    fn sub(self, aid: U) -> Self::Output {
-        let aid = aid.borrow();
-        let ns = self.0.into_iter().filter(|a| a != aid).collect();
-        Self(ns)
+    fn sub(self, u: U) -> Self::Output {
+        let other = u.borrow();
+        Self::from(self.0.into_iter().filter(|t| t != other))
     }
 }
 
 impl<T, U> SubAssign<U> for Neighbors<T>
 where
-    T: PartialEq + Eq + Clone,
+    T: PartialEq + Eq + Copy,
     U: Borrow<T>,
 {
-    fn sub_assign(&mut self, aid: U) {
-        let aid = aid.borrow();
+    fn sub_assign(&mut self, u: U) {
+        let other = u.borrow();
 
         self.0 = self
             .0
             .iter()
-            .filter_map(|a| if a != aid { Some(a.clone()) } else { None })
+            .filter_map(|t| if t != other { Some(*t) } else { None })
             .collect::<Vec<_>>();
     }
 }
