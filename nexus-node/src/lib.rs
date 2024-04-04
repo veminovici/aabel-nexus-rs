@@ -1,5 +1,7 @@
 mod actor_ext;
-mod node;
+mod mynode;
+mod neighbors;
 
 pub use actor_ext::*;
-pub use node::*;
+pub use mynode::*;
+pub use neighbors::*;

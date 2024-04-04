@@ -9,3 +9,6 @@ description.workspace = true
 actix = { workspace = true }
 nexus-ids = { path = "../nexus-ids" }
 nexus-message = { path = "../nexus-message" }
+
+[dev-dependencies]
+nexus-session-store = { path = "../nexus-session-store" }
