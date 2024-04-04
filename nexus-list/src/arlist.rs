@@ -3,9 +3,11 @@ use std::{
     ops::{Add, AddAssign, Sub, SubAssign},
 };
 
-pub struct Neighbors<T>(Vec<T>);
+/// Add-Remove list. Implements the [`Add`], [`AddAssign`], [`Sub`], and [`SubAssign`] traits,
+/// so it is easier to add or remove from the list.
+pub struct ARList<T>(Vec<T>);
 
-impl<T> Neighbors<T> {
+impl<T> ARList<T> {
     pub fn new() -> Self {
         Self(Default::default())
     }
@@ -15,25 +17,25 @@ impl<T> Neighbors<T> {
     }
 }
 
-impl<T> Default for Neighbors<T> {
+impl<T> Default for ARList<T> {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T> AsRef<[T]> for Neighbors<T> {
+impl<T> AsRef<[T]> for ARList<T> {
     fn as_ref(&self) -> &[T] {
         self.0.as_ref()
     }
 }
 
-impl<T> Borrow<[T]> for Neighbors<T> {
+impl<T> Borrow<[T]> for ARList<T> {
     fn borrow(&self) -> &[T] {
         self.as_ref()
     }
 }
 
-impl<T, I> From<I> for Neighbors<T>
+impl<T, I> From<I> for ARList<T>
 where
     I: Iterator<Item = T>,
 {
@@ -42,7 +44,7 @@ where
     }
 }
 
-impl<T, U> Add<U> for Neighbors<T>
+impl<T, U> Add<U> for ARList<T>
 where
     T: PartialEq + Eq + Copy,
     U: Borrow<T>,
@@ -62,7 +64,7 @@ where
     }
 }
 
-impl<T, U> AddAssign<U> for Neighbors<T>
+impl<T, U> AddAssign<U> for ARList<T>
 where
     T: PartialEq + Eq + Copy,
     U: Borrow<T>,
@@ -76,7 +78,7 @@ where
     }
 }
 
-impl<T, U> Sub<U> for Neighbors<T>
+impl<T, U> Sub<U> for ARList<T>
 where
     T: PartialEq + Eq,
     U: Borrow<T>,
@@ -89,7 +91,7 @@ where
     }
 }
 
-impl<T, U> SubAssign<U> for Neighbors<T>
+impl<T, U> SubAssign<U> for ARList<T>
 where
     T: PartialEq + Eq + Copy,
     U: Borrow<T>,
@@ -112,7 +114,7 @@ mod tests {
 
     #[test]
     fn add() {
-        let xs = Neighbors::with_items([Aid::from(1), Aid::from(2)].into_iter());
+        let xs = ARList::with_items([Aid::from(1), Aid::from(2)].into_iter());
 
         let xs = xs + Aid::from(3);
         assert_eq!(xs.as_ref(), [Aid::from(1), Aid::from(2), Aid::from(3)]);
@@ -123,7 +125,7 @@ mod tests {
 
     #[test]
     fn add_assign() {
-        let mut xs = Neighbors::with_items([Aid::from(1), Aid::from(2)].into_iter());
+        let mut xs = ARList::with_items([Aid::from(1), Aid::from(2)].into_iter());
 
         xs += Aid::from(3);
         assert_eq!(xs.as_ref(), [Aid::from(1), Aid::from(2), Aid::from(3)]);
@@ -134,7 +136,7 @@ mod tests {
 
     #[test]
     fn sub() {
-        let xs = Neighbors::with_items([Aid::from(1), Aid::from(2)].into_iter());
+        let xs = ARList::with_items([Aid::from(1), Aid::from(2)].into_iter());
 
         let xs = xs - Aid::from(3);
         assert_eq!(xs.as_ref(), [Aid::from(1), Aid::from(2)]);
@@ -145,7 +147,7 @@ mod tests {
 
     #[test]
     fn sub_assign() {
-        let mut xs = Neighbors::with_items([Aid::from(1), Aid::from(2)].into_iter());
+        let mut xs = ARList::with_items([Aid::from(1), Aid::from(2)].into_iter());
 
         xs -= Aid::from(3);
         assert_eq!(xs.as_ref(), [Aid::from(1), Aid::from(2)]);

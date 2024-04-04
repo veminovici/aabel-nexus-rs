@@ -1,6 +1,7 @@
-use crate::{ActorExt, Neighbors};
+use crate::ActorExt;
 use actix::{Actor, Context, Handler, Message, WeakRecipient};
 use nexus_ids::Aid;
+use nexus_list::ARList;
 use nexus_message::{Deliver, Dispatch, RegKernel, RegNeighbor, UnregNeighbor};
 
 pub trait Node: ActorExt {
@@ -11,7 +12,7 @@ pub trait Node: ActorExt {
 
 pub struct MyNode {
     krnl: Option<WeakRecipient<Dispatch>>,
-    neighbors: Neighbors<Aid>,
+    neighbors: ARList<Aid>,
 }
 
 impl MyNode {

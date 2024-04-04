@@ -12,6 +12,7 @@ A set of crates for distributed algorithms. They use an actor model and the [act
 ## Crates
 - The [nexus-ids][nexus-ids-folder] crate implements the actor and session identifiers.
 - The [nexus-hashmap][nexus-hashmap-folder] crate implements several extensions for the HashMap.
+- The [nexus-list][nexus-list-folder] crate implements an extension to list, by implementing Add, AddAssign, Sub, and SubAssign traits.
 - The [nexus-lattice][nexus-lattice-folder] crate defines *Join* and *Meet* traits, basic operations in the [lattice](https://en.wikipedia.org/wiki/Join_and_meet) theory.
 - The [nexus-counters][nexus-counters-folder] crate implements a distributed counter. In our case it will be used to increment different values.
 - The [nexus-session-store][nexus-session-store-folder] crate implements a store for session. Each session can store values for each node.
@@ -87,6 +88,7 @@ let _ = kernel.send(msg).await.unwrap();
 [url_estonia]: https://goo.gl/maps/DmB9ewY2R3sPGFnTA
 [nexus-ids-folder]: ./nexus-ids/
 [nexus-hashmap-folder]: ./nexus-hashmap/
+[nexus-list-folder]: ./nexus-list/
 [nexus-lattice-folder]: ./nexus-lattice/
 [nexus-counters-folder]: ./nexus-counters/
 [nexus-message-folder]: ./nexus-message/

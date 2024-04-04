@@ -252,6 +252,13 @@ name = "nexus-lattice"
 version = "0.1.0"
 
 [[package]]
+name = "nexus-list"
+version = "0.1.0"
+dependencies = [
+ "nexus-ids",
+]
+
+[[package]]
 name = "nexus-message"
 version = "0.1.0"
 dependencies = [
@@ -265,6 +272,7 @@ version = "0.1.0"
 dependencies = [
  "actix",
  "nexus-ids",
+ "nexus-list",
  "nexus-message",
  "nexus-session-store",
 ]

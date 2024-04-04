@@ -8,7 +8,6 @@ description.workspace = true
 [dependencies]
 actix = { workspace = true }
 nexus-ids = { path = "../nexus-ids" }
+nexus-list = { path = "../nexus-list" }
 nexus-message = { path = "../nexus-message" }
-
-[dev-dependencies]
 nexus-session-store = { path = "../nexus-session-store" }
