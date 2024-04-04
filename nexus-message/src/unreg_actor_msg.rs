@@ -37,19 +37,19 @@ impl MessageExt for UnregActor {
 
 impl From<Aid> for UnregActor {
     fn from(aid: Aid) -> Self {
-        Self(aid)
+        Self::new(aid)
     }
 }
 
 impl AsRef<Aid> for UnregActor {
     fn as_ref(&self) -> &Aid {
-        &self.0
+        self.aid()
     }
 }
 
 impl Borrow<Aid> for UnregActor {
     fn borrow(&self) -> &Aid {
-        &self.0
+        self.as_ref()
     }
 }
 

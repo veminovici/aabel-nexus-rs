@@ -37,19 +37,19 @@ impl MessageExt for RegNeighbor {
 
 impl From<Aid> for RegNeighbor {
     fn from(aid: Aid) -> Self {
-        Self(aid)
+        Self::new(aid)
     }
 }
 
 impl AsRef<Aid> for RegNeighbor {
     fn as_ref(&self) -> &Aid {
-        &self.0
+        self.aid()
     }
 }
 
 impl Borrow<Aid> for RegNeighbor {
     fn borrow(&self) -> &Aid {
-        &self.0
+        self.as_ref()
     }
 }
 

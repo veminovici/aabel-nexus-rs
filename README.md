@@ -15,9 +15,10 @@ A set of crates for distributed algorithms. They use an actor model and the [act
 - The [nexus-lattice][nexus-lattice-folder] crate defines *Join* and *Meet* traits, basic operations in the [lattice](https://en.wikipedia.org/wiki/Join_and_meet) theory.
 - The [nexus-counters][nexus-counters-folder] crate implements a distributed counter. In our case it will be used to increment different values.
 - The [nexus-session-store][nexus-session-store-folder] crate implements a store for session. Each session can store values for each node.
-- The [nexus-message][nexus-message-folder] crate implements serveral extensions for the actix::Message trait.
+- The [nexus-message][nexus-message-folder] crate defines the *MessageExt* trait, an extention for the *actix::Message* trait. The crate also defines the kernel and node control messages.
 - The [nexus-observer][nexus-observer-folder] crate implements the **Observer** actor. The actor counts the number of successful and failed operations during the execution of the run.
 - The [nexus-kernel][nexus-kernel-folder] crate implements the **Kernel** actor. The actor receives and delivers messages to other actors.
+- The [nexus-node][nexus-node-folder] crate defines the *ActorExt* trait, an extention for the actix::Actor trait.
 
 ## Examples
 You can find an example of how to use the Observer actor at in the [test_observer](./nexus-observer//tests/test_observer.rs) file.
@@ -92,5 +93,6 @@ let _ = kernel.send(msg).await.unwrap();
 [nexus-session-store-folder]: ./nexus-session-store/
 [nexus-observer-folder]: ./nexus-observer/
 [nexus-kernel-folder]: ./nexus-kernel/
+[nexus-node-folder]: ./nexus-node/
 [def]: ./nexus-hashmap/
 [actix_url]: https://actix.rs/docs/actix
