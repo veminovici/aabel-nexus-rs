@@ -260,6 +260,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "nexus-node"
+version = "0.1.0"
+dependencies = [
+ "actix",
+ "nexus-ids",
+ "nexus-kernel",
+ "nexus-message",
+]
+
+[[package]]
 name = "nexus-observer"
 version = "0.1.0"
 dependencies = [

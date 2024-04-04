@@ -10,7 +10,7 @@ pub struct Register {
 }
 
 impl Register {
-    const SHORT_NAME: &'static str = "REG";
+    const SHORT_NAME: &'static str = "ACTR+";
 
     pub fn new(aid: Aid, recipient: WeakRecipient<Deliver>) -> Self {
         Self { aid, recipient }

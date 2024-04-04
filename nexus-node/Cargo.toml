@@ -1,0 +1,12 @@
+[package]
+name = "nexus-node"
+version = "0.1.0"
+edition = "2021"
+authors.workspace = true
+description.workspace = true
+
+[dependencies]
+actix = { workspace = true }
+nexus-ids = { path = "../nexus-ids" }
+nexus-message = { path = "../nexus-message" }
+nexus-kernel = { path = "../nexus-kernel" }

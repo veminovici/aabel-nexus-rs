@@ -5,7 +5,7 @@ use nexus_message::{Header, MessageExt};
 pub struct Unregister(Aid);
 
 impl Unregister {
-    const SHORT_NAME: &'static str = "UNREG";
+    const SHORT_NAME: &'static str = "ACTR-";
 
     pub fn new(aid: Aid) -> Self {
         Self(aid)
