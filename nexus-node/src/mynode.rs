@@ -85,7 +85,7 @@ impl Handler<Deliver> for MyNode {
 
 impl Node for MyNode {
     fn handle_msg(&self, _msg: Deliver) -> impl Iterator<Item = Dispatch> {
-        eprintln!("MyNode - is handling a message");
+        eprintln!("{}: is handling a message", Self::SHORT_NAME);
         [].into_iter()
     }
 
