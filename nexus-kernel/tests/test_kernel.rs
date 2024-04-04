@@ -1,7 +1,7 @@
 use actix::{Actor, Context, Handler, Message};
 use nexus_ids::{Aid, Sid};
 use nexus_kernel::Kernel;
-use nexus_message::{Deliver, Dispatch, Register, Unregister};
+use nexus_message::{Deliver, Dispatch, RegActor, UnregActor};
 
 struct Validate;
 
@@ -47,7 +47,7 @@ async fn test_kernel() {
 
     // Register the actor
     let aid = 2.into();
-    let msg = Register::new(aid, actor.downgrade().recipient());
+    let msg = RegActor::new(aid, actor.downgrade().recipient());
     let _ = kernel.send(msg).await.unwrap();
 
     // Dispatch a message.
@@ -62,6 +62,6 @@ async fn test_kernel() {
     assert!(valid);
 
     // Unregister the actor
-    let msg = Unregister::new(aid);
+    let msg = UnregActor::new(aid);
     let _ = kernel.send(msg).await.unwrap();
 }

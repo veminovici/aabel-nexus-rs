@@ -1,6 +1,6 @@
 use actix::{Actor, Context, Handler, Message, WeakRecipient};
 use nexus_ids::Aid;
-use nexus_message::{Deliver, Dispatch, Register, Unregister};
+use nexus_message::{Deliver, Dispatch, RegActor, UnregActor};
 use std::collections::HashMap;
 
 pub struct Kernel {
@@ -54,10 +54,10 @@ impl Actor for Kernel {
     type Context = Context<Self>;
 }
 
-impl Handler<Register> for Kernel {
-    type Result = <Register as Message>::Result;
+impl Handler<RegActor> for Kernel {
+    type Result = <RegActor as Message>::Result;
 
-    fn handle(&mut self, msg: Register, _ctx: &mut Self::Context) -> Self::Result {
+    fn handle(&mut self, msg: RegActor, _ctx: &mut Self::Context) -> Self::Result {
         let aid = msg.aid();
         let recipient = msg.recipient();
 
@@ -73,10 +73,10 @@ impl Handler<Dispatch> for Kernel {
     }
 }
 
-impl Handler<Unregister> for Kernel {
-    type Result = <Unregister as Message>::Result;
+impl Handler<UnregActor> for Kernel {
+    type Result = <UnregActor as Message>::Result;
 
-    fn handle(&mut self, msg: Unregister, _ctx: &mut Self::Context) -> Self::Result {
+    fn handle(&mut self, msg: UnregActor, _ctx: &mut Self::Context) -> Self::Result {
         let aid = msg.aid();
         self.handle_unregister(aid)
     }

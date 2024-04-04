@@ -4,12 +4,12 @@ use nexus_ids::Aid;
 
 use crate::Deliver;
 
-pub struct Register {
+pub struct RegActor {
     aid: Aid,
     recipient: WeakRecipient<Deliver>,
 }
 
-impl Register {
+impl RegActor {
     const SHORT_NAME: &'static str = "ACTR+";
 
     pub fn new(aid: Aid, recipient: WeakRecipient<Deliver>) -> Self {
@@ -25,11 +25,11 @@ impl Register {
     }
 }
 
-impl Message for Register {
+impl Message for RegActor {
     type Result = ();
 }
 
-impl MessageExt for Register {
+impl MessageExt for RegActor {
     fn short_name(&self) -> &str {
         Self::SHORT_NAME
     }

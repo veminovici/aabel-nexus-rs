@@ -1,17 +1,17 @@
+use crate::{Header, MessageExt};
 use actix::Message;
 use nexus_ids::Aid;
-use nexus_message::{Header, MessageExt};
 use std::borrow::Borrow;
 
-pub struct AddNeighbor(Aid);
+pub struct UnregNeighbor(Aid);
 
-impl Message for AddNeighbor {
+impl Message for UnregNeighbor {
     type Result = ();
 }
 
-impl MessageExt for AddNeighbor {
+impl MessageExt for UnregNeighbor {
     fn short_name(&self) -> &str {
-        "NGHB+"
+        "NGHB-"
     }
 
     fn headers(&self) -> impl Iterator<Item = &Header> {
@@ -23,19 +23,19 @@ impl MessageExt for AddNeighbor {
     }
 }
 
-impl From<Aid> for AddNeighbor {
+impl From<Aid> for UnregNeighbor {
     fn from(aid: Aid) -> Self {
         Self(aid)
     }
 }
 
-impl AsRef<Aid> for AddNeighbor {
+impl AsRef<Aid> for UnregNeighbor {
     fn as_ref(&self) -> &Aid {
         &self.0
     }
 }
 
-impl Borrow<Aid> for AddNeighbor {
+impl Borrow<Aid> for UnregNeighbor {
     fn borrow(&self) -> &Aid {
         &self.0
     }
