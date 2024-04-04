@@ -9,4 +9,3 @@ description.workspace = true
 actix = { workspace = true }
 nexus-ids = { path = "../nexus-ids" }
 nexus-message = { path = "../nexus-message" }
-nexus-kernel = { path = "../nexus-kernel" }

@@ -4,7 +4,8 @@
 //! ```
 //! use actix::{Actor, Context, Handler, Message};
 //! use nexus_ids::{Aid, Sid};
-//! use nexus_kernel::{Deliver, Dispatch, Kernel, Register, Unregister};
+//! use nexus_kernel::Kernel;
+//! use nexus_message::{Deliver, Dispatch, Register, Unregister};
 //!
 //! struct Validate;
 //!
@@ -69,14 +70,6 @@
 //! }
 //! ```
 
-mod deliver_msg;
-mod dispatch_msg;
 mod kernel;
-mod register_msg;
-mod unregister_msg;
 
-pub use deliver_msg::*;
-pub use dispatch_msg::*;
 pub use kernel::*;
-pub use register_msg::*;
-pub use unregister_msg::*;

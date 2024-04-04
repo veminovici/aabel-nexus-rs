@@ -1,6 +1,6 @@
+use crate::{Header, MessageExt};
 use actix::Message;
 use nexus_ids::{Aid, Sid};
-use nexus_message::{Header, MessageExt};
 
 pub struct Dispatch {
     from: Header,

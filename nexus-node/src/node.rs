@@ -1,4 +1,4 @@
-use nexus_kernel::{Deliver, Dispatch};
+use nexus_message::{Deliver, Dispatch};
 
 pub trait Node {
     /// Handles an incoming message. It returns the collection

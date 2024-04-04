@@ -1,6 +1,7 @@
 use actix::{Actor, Context, Handler, Message};
 use nexus_ids::{Aid, Sid};
-use nexus_kernel::{Deliver, Dispatch, Kernel, Register, Unregister};
+use nexus_kernel::Kernel;
+use nexus_message::{Deliver, Dispatch, Register, Unregister};
 
 struct Validate;
 

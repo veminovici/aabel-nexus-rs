@@ -265,7 +265,6 @@ version = "0.1.0"
 dependencies = [
  "actix",
  "nexus-ids",
- "nexus-kernel",
  "nexus-message",
 ]
 

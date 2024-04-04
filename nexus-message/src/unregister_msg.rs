@@ -1,6 +1,6 @@
+use crate::{Header, MessageExt};
 use actix::Message;
 use nexus_ids::Aid;
-use nexus_message::{Header, MessageExt};
 
 pub struct Unregister(Aid);
 

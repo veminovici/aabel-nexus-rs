@@ -1,9 +1,7 @@
-use std::collections::HashMap;
-
 use actix::{Actor, Context, Handler, Message, WeakRecipient};
 use nexus_ids::Aid;
-
-use crate::{Deliver, Dispatch, Register, Unregister};
+use nexus_message::{Deliver, Dispatch, Register, Unregister};
+use std::collections::HashMap;
 
 pub struct Kernel {
     nodes: HashMap<Aid, WeakRecipient<Deliver>>,

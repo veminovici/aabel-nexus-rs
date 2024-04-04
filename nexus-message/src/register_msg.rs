@@ -1,6 +1,6 @@
+use crate::{Header, MessageExt};
 use actix::{Message, WeakRecipient};
 use nexus_ids::Aid;
-use nexus_message::{Header, MessageExt};
 
 use crate::Deliver;
 
