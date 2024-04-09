@@ -35,8 +35,9 @@ impl Kernel {
                 let fid = msg.fid();
                 let tid = msg.tid();
                 let sid = msg.sid();
+                let body = msg.body();
 
-                let dlvr = Deliver::new(fid, tid, sid);
+                let dlvr = Deliver::new(fid, tid, sid, body);
 
                 recipient.do_send(dlvr)
             })

@@ -5,7 +5,7 @@
 //! use actix::{Actor, Context, Handler, Message};
 //! use nexus_ids::{Aid, Sid};
 //! use nexus_kernel::Kernel;
-//! use nexus_message::{Deliver, Dispatch, RegActor, UnregActor};
+//! use nexus_message::{Body, Deliver, Dispatch, RegActor, UnregActor};
 //!
 //! struct Validate;
 //!
@@ -57,7 +57,8 @@
 //!   let fid = Aid::from(1);
 //!   let tid = aid;
 //!   let sid = Sid::from(fid);
-//!   let msg = Dispatch::new(fid, tid, sid);
+//!   let body = Body::new();
+//!   let msg = Dispatch::new(&fid, &tid, &sid, &body);
 //!   let _ = kernel.send(msg).await.unwrap();
 //!
 //!   // Validate

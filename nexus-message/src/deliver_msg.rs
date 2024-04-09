@@ -1,34 +1,32 @@
-use crate::{Header, MessageExt};
+use std::borrow::Borrow;
+
+use crate::{Body, Header, MessageExt, Msg};
 use actix::Message;
 use nexus_ids::{Aid, Sid};
 
-pub struct Deliver {
-    from: Header,
-    to: Header,
-    session: Header,
-}
+pub struct Deliver(Msg);
 
 impl Deliver {
     const SHORT_NAME: &'static str = "DLVR";
 
-    pub fn new(fid: &Aid, tid: &Aid, sid: &Sid) -> Self {
-        Self {
-            from: Header::From(*fid),
-            to: Header::To(*tid),
-            session: Header::Session(*sid),
-        }
+    pub fn new(fid: &Aid, tid: &Aid, sid: &Sid, body: &Body) -> Self {
+        Self(Msg::new(fid, tid, sid, body))
     }
 
     pub fn fid(&self) -> &Aid {
-        self.from.try_from().unwrap()
+        self.0.fid()
     }
 
     pub fn tid(&self) -> &Aid {
-        self.to.try_to().unwrap()
+        self.0.tid()
     }
 
     pub fn sid(&self) -> &Sid {
-        self.session.try_session().unwrap()
+        self.0.sid()
+    }
+
+    pub fn body(&self) -> &Body {
+        self.0.body()
     }
 }
 
@@ -42,10 +40,28 @@ impl MessageExt for Deliver {
     }
 
     fn headers(&self) -> impl Iterator<Item = &Header> {
-        [&self.from, &self.to, &self.session].into_iter()
+        self.0.headers()
     }
 
     fn body(&self) -> impl Iterator<Item = u8> {
-        [].into_iter()
+        self.0.body().as_ref().iter().copied()
+    }
+}
+
+impl AsRef<Msg> for Deliver {
+    fn as_ref(&self) -> &Msg {
+        &self.0
+    }
+}
+
+impl Borrow<Msg> for Deliver {
+    fn borrow(&self) -> &Msg {
+        self.as_ref()
+    }
+}
+
+impl From<&Msg> for Deliver {
+    fn from(msg: &Msg) -> Self {
+        Self(msg.clone())
     }
 }
