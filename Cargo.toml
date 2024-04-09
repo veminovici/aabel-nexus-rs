@@ -1,5 +1,5 @@
 [workspace]
-members = [ "nexus-counters", "nexus-hashmap","nexus-ids", "nexus-kernel", "nexus-lattice", "nexus-list", "nexus-message", "nexus-node", "nexus-observer", "nexus-session-store"]
+members = [ "nexus-counters", "nexus-hashmap","nexus-ids", "nexus-kernel", "nexus-lattice", "nexus-list", "nexus-message", "nexus-node", "nexus-observer", "nexus-serialize", "nexus-session-store"]
 resolver = "2"
 
 [workspace.package]
