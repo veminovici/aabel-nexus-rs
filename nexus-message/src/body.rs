@@ -4,14 +4,8 @@ use std::borrow::Borrow;
 pub struct Body(Vec<u8>);
 
 impl Body {
-    pub fn new() -> Self {
-        Body(vec![])
-    }
-}
-
-impl Default for Body {
-    fn default() -> Self {
-        Self::new()
+    pub fn new(xs: impl Iterator<Item = u8>) -> Self {
+        Body(xs.collect())
     }
 }
 

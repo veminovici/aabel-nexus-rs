@@ -1,4 +1,5 @@
 use actix::{Actor, Context, Handler, Message};
+use nexus_ids::Aid;
 use nexus_message::{Deliver, Dispatch, RegKernel, RegNeighbor, UnregNeighbor};
 use nexus_node::{BaseNode, Node};
 
@@ -7,14 +8,8 @@ pub struct MyNode(BaseNode);
 impl MyNode {
     const SHORT_NAME: &'static str = "MYND";
 
-    pub fn new() -> Self {
-        Self(Default::default())
-    }
-}
-
-impl Default for MyNode {
-    fn default() -> Self {
-        Self::new()
+    pub fn new(aid: Aid) -> Self {
+        Self(BaseNode::new(aid))
     }
 }
 

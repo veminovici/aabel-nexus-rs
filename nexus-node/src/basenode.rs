@@ -4,16 +4,22 @@ use nexus_list::ARList;
 use nexus_message::Dispatch;
 
 pub struct BaseNode {
+    aid: Aid,
     krnl: Option<WeakRecipient<Dispatch>>,
     neighbors: ARList<Aid>,
 }
 
 impl BaseNode {
-    pub fn new() -> Self {
+    pub fn new(aid: Aid) -> Self {
         Self {
+            aid,
             krnl: None,
             neighbors: Default::default(),
         }
+    }
+
+    pub fn aid(&self) -> &Aid {
+        &self.aid
     }
 
     pub fn do_send(&self, msg: Dispatch) {
@@ -34,11 +40,5 @@ impl BaseNode {
 
     pub fn unreg_neighbor(&mut self, aid: &Aid) {
         self.neighbors -= aid;
-    }
-}
-
-impl Default for BaseNode {
-    fn default() -> Self {
-        Self::new()
     }
 }

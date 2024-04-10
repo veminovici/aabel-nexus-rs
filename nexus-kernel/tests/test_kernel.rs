@@ -54,7 +54,7 @@ async fn test_kernel() {
     let fid = Aid::from(1);
     let tid = aid;
     let sid = Sid::from(fid);
-    let body = Body::new();
+    let body = Body::new([].into_iter());
     let msg = Dispatch::new(&fid, &tid, &sid, &body);
     let _ = kernel.send(msg).await.unwrap();
 
