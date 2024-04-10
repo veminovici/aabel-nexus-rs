@@ -35,6 +35,12 @@ mod tests {
         val: Vec<MyData>,
     }
 
+    #[derive(Debug, Serialize, Deserialize)]
+    enum Test {
+        Ping(u8),
+        Pong(String),
+    }
+
     #[test]
     fn sd() {
         let mydata1 = MyData {
@@ -58,5 +64,24 @@ mod tests {
 
         let deserialized: MyMessage = from_bytes(bs.as_slice()).unwrap();
         eprintln!("deserialized: {deserialized:?}");
+    }
+
+    #[test]
+    fn ping_pong() {
+        let msg = Test::Ping(10);
+
+        let bs = to_bytes(&msg).unwrap();
+        eprintln!("serialized ping: {}", bs.len());
+
+        let des: Test = from_bytes(bs.as_slice()).unwrap();
+        eprintln!("ping: {des:?}");
+
+        let msg = Test::Pong("test".to_string());
+
+        let bs = to_bytes(&msg).unwrap();
+        eprintln!("serialized pong: {}", bs.len());
+
+        let des: Test = from_bytes(bs.as_slice()).unwrap();
+        eprintln!("ping: {des:?}");
     }
 }
