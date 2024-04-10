@@ -1,5 +1,7 @@
 mod actor_ext;
-mod mynode;
+mod basenode;
+mod node;
 
 pub use actor_ext::*;
-pub use mynode::*;
+pub use basenode::*;
+pub use node::*;

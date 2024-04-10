@@ -293,6 +293,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "nexus-pingpong"
+version = "0.1.0"
+dependencies = [
+ "actix",
+ "nexus-message",
+ "nexus-node",
+]
+
+[[package]]
 name = "nexus-serialize"
 version = "0.1.0"
 dependencies = [

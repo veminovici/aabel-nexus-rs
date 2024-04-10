@@ -1,0 +1,11 @@
+[package]
+name = "nexus-pingpong"
+version = "0.1.0"
+edition = "2021"
+authors.workspace = true
+description.workspace = true
+
+[dependencies]
+actix = { workspace = true }
+nexus-message = { path = "../../nexus-message" }
+nexus-node = { path = "../../nexus-node" }
